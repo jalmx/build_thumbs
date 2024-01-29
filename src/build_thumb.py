@@ -6,6 +6,11 @@ from time import time
 
 from PIL import Image, ImageFont, ImageDraw
 
+##FONT="/usr/share/fonts/JetBrainsMono-2.242/fonts/ttf/JetBrainsMono-Regular.ttf"
+
+FONT = "/usr/share/fonts/TTF/JetBrainsMonoNerdFontMono-Regular.ttf"
+COLOR = (26, 26, 26)  # "white"
+
 
 def load_file(path_file: str) -> list:
     """
@@ -32,7 +37,7 @@ def generate_name(name_file: str, number: str, with_hash=False):
 
 
 def build_font(size):
-    font = "/usr/share/fonts/JetBrainsMono-2.242/fonts/ttf/JetBrainsMono-Regular.ttf"
+    font = FONT
     size_font = size
     return ImageFont.truetype(font, size_font, encoding="utf-8")
 
@@ -40,7 +45,7 @@ def build_font(size):
 def adjust_title(text: str, img, size_font) -> str:
     """
     Adjust the phase to fix the new line for text
-    :param text: text to fix
+    :param text: content text to fix
     :param img: image where to insert
     :param size_font: size for the font
     :return:
@@ -74,7 +79,7 @@ def insert_text(img, text: str):
     x = (img.size[0] // 2) - (text_x2 // 2)
     y = (img.size[1] // 2) - (text_y2 // 2)
 
-    draw.text((x, y), text, fill=(26, 26, 26), font=build_font(size_font), align="center")
+    draw.text((x, y), text, fill=COLOR, font=build_font(size_font), align="center")
     return img
 
 
@@ -95,7 +100,7 @@ def insert_number(img, number):
     x = -20 + 32  # generated an offset unknown
     y = (img.size[1] - text_y2 - 32)
 
-    draw.text((x, y), str(number), fill=(26, 26, 26), font=build_font(size_font), align="center")
+    draw.text((x, y), str(number), fill=COLOR, font=build_font(size_font), align="center")
     return img
 
 
@@ -112,7 +117,7 @@ def folder_to_save(folder_name):
 
 
 def main():
-    path_thumb = "../assets/thumb_java_base.png"
+    path_thumb = "../assets/thumbs_analogica.png"
     path_file = "titles.csv"
 
     titles = load_file(path_file)
@@ -133,3 +138,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+### recibir el archivo, la imagen base, el color de las letrass y la ubicacion de la fuente
